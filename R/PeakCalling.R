@@ -8,6 +8,7 @@
 #' @return ArchR_project with peaks called
 #'
 #' @export
+library(ArchR)
 
 PeakCalling<-function(ArchR_project = NULL,cell_population = NULL){
   dir.create(output_folder)
