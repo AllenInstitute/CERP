@@ -9,7 +9,7 @@
 To setup the workflow, start by cloning it in your server.
 
 ```
-git clone https://github.com/AllenInstitute/peakCallingPipeline/edit/main/README.md
+git clone https://github.com/AllenInstitute/peakCallingPipeline
 ```
 
 Next, load the conda env required to run the workflow. The existing conda environment can be found at TEMP:
