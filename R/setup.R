@@ -8,7 +8,7 @@
 #' @return None
 #'
 #' @export
-archr_setup = function(genome, archr.threads){
+setup = function(genome, archr.threads){
     ## Genome annotation info using ArchR defaults
     addArchRGenome(genome)
     ## Multi-core
