@@ -2,7 +2,7 @@
 
 ## Introduction
 
-General peak calling pipeline for multiple species that outputs peak lists per cell type to then be annotated and filtered in a later step.
+![](https://github.com/AllenInstitute/peakCallingPipeline/blob/main/Pipelines%20-%20ArchR%20peak%20calling%20pipeline%20schematic.jpg)
 
 ## Install workflow
 
