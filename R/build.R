@@ -23,7 +23,7 @@ build = function(arrow.file.dir, cell.annotation.file, archr.proj="peakCallingPi
         if(length(arrow.files) == 0){stop("No arrow files found, please check input.")}
 
         ## Assemble ArchR project from Arrow files
-        archr.proj = ArchRProject(
+        archr.proj = ArchR::ArchRProject(
             ArrowFiles = arrow.files, 
             outputDirectory = archr.proj,
             copyArrows = TRUE,

@@ -16,18 +16,19 @@ peakCalling<-function(archr.proj = NULL, groupBy = NULL, ...){
   print(paste("Calling peaks by: ", groupBy))
 
   ## MACS2 peak caller
-  pathToMacs2 <- findMacs2()
+  pathToMacs2 <- ArchR::findMacs2()
 
   ## Define peak sets
-  archr.proj <- addReproduciblePeakSet(ArchRProj = archr.proj, 
-                                        groupBy = groupBy, 
-                                        peakMethod = pathToMacs2,
-                                        force=TRUE,
-                                        ...)
+  archr.proj = ArchR::addReproduciblePeakSet(
+                ArchRProj = archr.proj, 
+                groupBy = groupBy, 
+                peakMethod = pathToMacs2,
+                force=TRUE,
+                ...)
 
     ## Add peak matrix
   print("Peak calling finished, adding peak matrix to ArchRProject")  
-  archr.proj <- addPeakMatrix(archr.proj)
+  archr.proj <- ArchR::addPeakMatrix(archr.proj)
 
   return(archr.proj)
 }
