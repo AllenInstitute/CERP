@@ -2,53 +2,64 @@
 #'
 #' 
 #'
-#' @param ArchR_project ArchR object with peaks called
-#' @param output_folder If specified, will save marker heatmap pdf to output folder location, along with the peak matrix
+#' @param archr.proj ArchR object with peaks called
+#' @param groupBy 
+#' @param output.folder If specified, will save marker heatmap pdf to output folder location, along with the peak matrix
 #'
-#' @return list, ArchR_project, statistically significant peaks, peak matrix 
+#' @return archr.proj, statistically significant peaks, peak matrix 
 #' 
 #' @export 
-library(ArchR)
-library(data.table)
-library(Signac)
+markerPeaks = function(archr.proj = NULL, groupBy = NULL, output.folder = NULL){
 
+  ##
+  dir.create(output.folder)
+  
+  ##
+  archr.proj = addPeakMatrix(archr.proj,
+                             force = TRUE)
+  
+  ##
+  peak.matrix = getMatrixFromProject(ArchRProj = archr.proj,
+                                     useMatrix = "PeakMatrix",
+                                     useSeqnames = NULL,
+                                     verbose = TRUE,
+                                     binarize = FALSE,
+                                     threads = getArchRThreads(),
+                                     logFile = createLogFile("getMatrixFromProject"))
+  peak.matrix@rowRanges$peak = paste(GRangesToString(peak.matrix@rowRanges,sep = c(":","-"))) 
+  
+  ##
+  marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 
+                                        useMatrix = "PeakMatrix", 
+                                        groupBy = groupBy) # column results from atac integration...bias = c("TSSEnrichment", "log10(nFrags)"),testMethod = "wilcoxon")
+  
+  ## Should we filter here????
+  marker_peaks = as.data.table(getMarkers(marker_features))
+  
+  ## 
+  heatmapPeaks  = plotMarkerHeatmap(seMarker = marker_features, 
+                                    cutOff = "FDR <= 0.1 & Log2FC >= 0.5",
+                                    transpose = TRUE,
+                                    plotLog2FC = TRUE)
 
-preprocess_by_var<-function(ArchR_project = NULL,cell_population = NULL,output_folder = NULL){
-  dir.create(output_folder)
+  ##
+  plotPDF(heatmapPeaks, name = paste0(groupBy,"_marker_peaks.pdf"), width = 16, height = 12, ArchRProj = archr.proj, addDOC = FALSE)
   
-
-  ArchR_project<-addPeakMatrix(ArchR_project,force = T)
-  
-  peak_matrix<-getMatrixFromProject(ArchRProj = ArchR_project,useMatrix = "PeakMatrix",
-                                    useSeqnames = NULL,verbose = TRUE,binarize = FALSE,threads = getArchRThreads(),
-                                    logFile = createLogFile("getMatrixFromProject"))
-  peak_matrix@rowRanges$peak<-paste(GRangesToString(peak_matrix@rowRanges,sep = c(":","-"))) 
-  
-  #saveRDS(peak_matrix, file = paste0(output_folder,'/',cell_population,'_peakmatrix'))
-  marker_features <- getMarkerFeatures(ArchRProj = ArchR_project, useMatrix = "PeakMatrix", groupBy = cell_population) # column results from atac integration...bias = c("TSSEnrichment", "log10(nFrags)"),testMethod = "wilcoxon")
-  marker_peaks<-as.data.table(getMarkers(marker_features))
-  
-
-  heatmapPeaks <-plotMarkerHeatmap(seMarker = marker_features, cutOff = "FDR <= 0.1 & Log2FC >= 0.5",
-                                    transpose = TRUE,plotLog2FC = T)
-  
-  draw(heatmapPeaks, heatmap_legend_side = "bot", annotation_legend_side = "bot")
-  
-  plotPDF(heatmapPeaks, name = paste0(cell_population,"_marker_peaks.pdf"), width = 16, height = 12, ArchRProj = ArchR_project, addDOC = FALSE)
-  hm<-draw(heatmapPeaks, heatmap_legend_side = "bot", annotation_legend_side = "bot")
-
-  if(!is.null(output_folder)){
-    paste0(output_folder,"/",cell_population,"_marker_peaks_heatmap.pdf")
+  ##
+  if(!is.null(output.folder)){
+    ##
+    paste0(output.folder,"/",groupBy,"_marker_peaks_heatmap.pdf")
     pdf(file =  "/allen/programs/celltypes/workgroups/mct-t200/marcus/Z_data_analyses/MTX2060TH/MTX2060_hm_test.pdf")
-    hm
+    print(draw(heatmapPeaks, heatmap_legend_side = "bot", annotation_legend_side = "bot"))
     dev.off()
-    saveRDS(peak_matrix,file = paste0(output_folder,"/",cell_population,"_peak_matrix"))
-    saveRDS(marker_list,file = paste0(output_folder,"/",cell_population,"_marker_peaks"))
+    
+    ##
+    saveRDS(peak.matrix,file = paste0(output.folder,"/",groupBy,"_peak_matrix"))
+    saveRDS(marker.list,file = paste0(output.folder,"/",groupBy,"_marker_peaks"))
   }else{}
   
-  obj_list<-list(ArchR_project, marker_list,peak_matrix,hm)
-  names(obj_list)<-c("ArchR_project","marker_list","peak_matrix","heatmap")
+  obj_list = list(archr.proj, marker.list, peak.matrix)
+  names(obj_list) = c("archr.proj","marker.list","peak.matrix","heatmap")
   
   return(obj_list)
-  
 }

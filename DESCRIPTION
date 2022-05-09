@@ -1,0 +1,26 @@
+Package: peakCallingPipeline
+Title: Call peaks for variety of ATAC-Seq data
+Version: 0.1
+Authors@R: 
+    person(given = "Nelson",
+           family = "Johansen",
+           role = c("aut", "cre"),
+           email = "nelson.johansen@alleninstitute.org")
+    person(given = "Marcus",
+        family = "Hooper",
+        role = c("aut", "cre"),
+        email = "marcus.hooper@alleninstitute.org")
+URL: https://github.com/
+Description: ADD
+License: GPL-3
+Depends: ArchR,
+    data.table,
+    Signac
+Suggests: knitr, 
+    rmarkdown, 
+    testthat
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
