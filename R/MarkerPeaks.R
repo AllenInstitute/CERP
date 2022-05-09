@@ -47,15 +47,15 @@ markerPeaks = function(archr.proj = NULL, groupBy = NULL, output.folder = NULL){
   
   ##
   if(!is.null(output.folder)){
-    ##
+    ## ? Do we need to also save the heatmap to the output foler is is the ArchRProject Plots folder sufficient?
     paste0(output.folder,"/",groupBy,"_marker_peaks_heatmap.pdf")
     pdf(file =  "/allen/programs/celltypes/workgroups/mct-t200/marcus/Z_data_analyses/MTX2060TH/MTX2060_hm_test.pdf")
     print(draw(heatmapPeaks, heatmap_legend_side = "bot", annotation_legend_side = "bot"))
     dev.off()
     
-    ##
-    saveRDS(peak.matrix,file = paste0(output.folder,"/",groupBy,"_peak_matrix"))
-    saveRDS(marker.list,file = paste0(output.folder,"/",groupBy,"_marker_peaks"))
+    ## ? I don't think we want to write out the peak matrix, lets discuss
+    #saveRDS(peak.matrix,file = paste0(output.folder,"/",groupBy,"_peak_matrix"))
+    saveRDS(marker.list, file = paste0(output.folder,"/",groupBy,"_marker_peaks"))
   }else{}
   
   obj_list = list(archr.proj, marker.list, peak.matrix)

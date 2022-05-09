@@ -25,5 +25,7 @@ clusteringDimReduc = function(archr.proj, groupBy, tileSize=25, normMethod="Read
     threads = getArchRThreads(),
     logFile = createLogFile("getGroupBW")
   )
-  
+
+  ## Generate fragment files
+
 }

@@ -15,7 +15,7 @@ Description: ADD
 License: GPL-3
 Depends: ArchR,
     data.table,
-    Signac
+    QuiveR
 Suggests: knitr, 
     rmarkdown, 
     testthat
