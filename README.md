@@ -2,7 +2,7 @@
 
 ## Introduction
 
-![](https://github.com/AllenInstitute/peakCallingPipeline/blob/main/Pipelines%20-%20ArchR%20peak%20calling%20pipeline%20schematic.jpg)
+![](https://github.com/AllenInstitute/peakCallingPipeline/blob/main/schematic.jpg)
 
 ## Install pipeline
 
