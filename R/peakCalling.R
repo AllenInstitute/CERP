@@ -23,7 +23,7 @@ peakCalling = function(archr.proj, groupBy, ...){
                 force=TRUE,
                 ...)
 
-    ## Add peak matrix
+  ## Add peak matrix
   print("Peak calling finished, adding peak matrix to ArchRProject")  
   archr.proj <- addPeakMatrix(archr.proj)
 

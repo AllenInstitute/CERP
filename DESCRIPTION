@@ -17,7 +17,7 @@ Depends: ArchR,
     parallel,
     data.table,
     assertthat
-Suggests: knitr, 
+Suggests: knitr,
     rmarkdown, 
     testthat
 Encoding: UTF-8

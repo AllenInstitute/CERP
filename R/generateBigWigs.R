@@ -11,7 +11,7 @@
 #' @return None
 #'
 #' @keywords internal
-clusteringDimReduc = function(archr.proj, groupBy, tileSize=25, normMethod="ReadsInTSS", maxCells=NULL){
+generateBigWigs = function(archr.proj, groupBy, tileSize=25, normMethod="ReadsInTSS", maxCells=NULL){
 
   ## Build BigWig files post group coverage
   getGroupBW(
@@ -27,5 +27,4 @@ clusteringDimReduc = function(archr.proj, groupBy, tileSize=25, normMethod="Read
   )
 
   ## Generate fragment files
-
 }
