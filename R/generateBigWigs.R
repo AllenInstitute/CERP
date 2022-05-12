@@ -10,7 +10,7 @@
 #'
 #' @return None
 #'
-#' @export
+#' @internal
 clusteringDimReduc = function(archr.proj, groupBy, tileSize=25, normMethod="ReadsInTSS", maxCells=NULL){
 
   ## Build BigWig files post group coverage

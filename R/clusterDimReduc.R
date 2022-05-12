@@ -9,7 +9,7 @@
 #'
 #' @return None
 #'
-#' @export
+#' @internal
 clusteringDimReduc = function(archr.proj, varFeatures=15000, resolution=c(0.2, 1, 2), ...){
 
   ## Perform clustering

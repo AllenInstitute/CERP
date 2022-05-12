@@ -2,14 +2,14 @@
 #'
 #' Sets global variables about specific genome build and number of threads to utilze on the machine.
 #'
-#' @param arrow.file.dir Valid genome name for ArchR: mm10, hg38
-#' @param cell.annotation.file Number of threads to utilize, warning increases memory usage as well.
+#' @param arrow.file.dir 
+#' @param cell.annotation.file Cell annotation file (.csv, .feather) that 
 #' @param archr.proj An already setup ArchR project or a string to build a new ArchR project.
 #' @param ... Additional parameters to ArchRProject()
 #'
 #' @return None
 #'
-#' @export
+#' @internal
 build = function(arrow.file.dir, cell.annotation.file, archr.proj="peakCallingPipeline", ...){
 
     ## Build ArchRProject 
@@ -29,27 +29,26 @@ build = function(arrow.file.dir, cell.annotation.file, archr.proj="peakCallingPi
             copyArrows = TRUE,
             ...
         )
+
+        ## Add metadata to ArchR project
+        if(grep("csv", cell.annotation.file)){
+            cell.annotations = read.csv(cell.annotation.file)
+        }else if(grep("feather", cell.annotation.file)){
+            cell.annotations = read.feather(cell.annotation.file)
+        }else{
+            stop("Unidentified file type for cell annotations, should be csv or feather format")
+        }
+
+        ## Add metadata if not passed an ArchRproject
+        archr.proj = addCellColData(ArchRProj = archr.proj,
+                                    data = cell.annotations)
+    
     }else{
-        if(is.null(archr.proj)){ stop("archr.proj must not be NULL. Either pre-build ArchRProject or string for building a new ArchRProject")}
+        if(is.null(archr.proj)){ stop("archr.proj must not be NULL. Either pre-build ArchRProject or supply a name (string) for building a new ArchRProject")}
         
         ## Passed basic checks, using user supplied ArchRProject
         print("Using predefined ArchR Project")
     }
-
-    ## Add metadata to ArchR project
-    if(grep("csv", cell.annotation.file)){
-        cell.annotations = read.csv(cell.annotation.file)
-    }else if(grep("feather", cell.annotation.file)){
-        cell.annotations = read.feather(cell.annotation.file)
-    }else if(is.null(cell.annotation.file)){
-        cell.annotations = NULL
-    }else{
-        stop("Unidentified file type for cell annotations, should be csv or feather format")
-    }
-
-    ## Add metadata 
-    archr.proj = addCellColData(ArchRProj = archr.proj,
-                                data = cell.annotations)
 
     ##
     return(archr.proj)

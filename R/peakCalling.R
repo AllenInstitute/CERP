@@ -1,6 +1,5 @@
 #' Calls peaks downstream of GroupCoverage based on variable of interest
 #'
-#' 
 #'
 #' @param archr.proj ArchR project with group coverages
 #' @param groupBy Cell population of interest which should be in cellColData
@@ -8,10 +7,8 @@
 #'
 #' @return archr.proj with peaks called
 #'
-#' @export
-library(ArchR)
-
-peakCalling<-function(archr.proj = NULL, groupBy = NULL, ...){
+#' @internal
+peakCalling = function(archr.proj, groupBy, ...){
  
   print(paste("Calling peaks by: ", groupBy))
 
