@@ -6,10 +6,10 @@
 #' @param varFeatures Number of variable features to use for cluster
 #' @param resolution Vector of clustering resolutions for multi-round clusters
 #' @param ... Additional arguments for addIterativeLSI
-#'
+#' 
 #' @return None
 #'
-#' @internal
+#' @keywords internal
 clusteringDimReduc = function(archr.proj, varFeatures=15000, resolution=c(0.2, 1, 2), ...){
 
   ## Perform clustering

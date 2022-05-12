@@ -2,11 +2,12 @@
 #'
 #' @param archr.proj ArchR object with peaks called
 #' @param groupBy Metadata field to group cells by
+#' @param archr.visualize Should marker peak visualizations be produced
 #'
 #' @return archr.proj, statistically significant peaks, peak matrix 
 #' 
-#' @internal
-markerPeaks = function(archr.proj, groupBy){
+#' @keywords internal
+markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE){
 
   ## Stat. test for marker peaks
   marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 

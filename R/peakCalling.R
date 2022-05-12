@@ -4,19 +4,19 @@
 #' @param archr.proj ArchR project with group coverages
 #' @param groupBy Cell population of interest which should be in cellColData
 #' @param ... Additional arguments to addReproduciblePeakSet
-#'
+#' 
 #' @return archr.proj with peaks called
 #'
-#' @internal
+#' @keywords internal
 peakCalling = function(archr.proj, groupBy, ...){
  
   print(paste("Calling peaks by: ", groupBy))
 
   ## MACS2 peak caller
-  pathToMacs2 <- ArchR::findMacs2()
+  pathToMacs2 <- findMacs2()
 
   ## Define peak sets
-  archr.proj = ArchR::addReproduciblePeakSet(
+  archr.proj = addReproduciblePeakSet(
                 ArchRProj = archr.proj, 
                 groupBy = groupBy, 
                 peakMethod = pathToMacs2,
@@ -25,7 +25,7 @@ peakCalling = function(archr.proj, groupBy, ...){
 
     ## Add peak matrix
   print("Peak calling finished, adding peak matrix to ArchRProject")  
-  archr.proj <- ArchR::addPeakMatrix(archr.proj)
+  archr.proj <- addPeakMatrix(archr.proj)
 
   return(archr.proj)
 }

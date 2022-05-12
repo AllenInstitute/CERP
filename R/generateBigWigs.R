@@ -7,10 +7,10 @@
 #' @param tileSize Width of tiles that will section the genome
 #' @param normMethod Normalization method for fragment pileups 
 #' @param maxCells Number of cells to use for each group.
-#'
+#' 
 #' @return None
 #'
-#' @internal
+#' @keywords internal
 clusteringDimReduc = function(archr.proj, groupBy, tileSize=25, normMethod="ReadsInTSS", maxCells=NULL){
 
   ## Build BigWig files post group coverage

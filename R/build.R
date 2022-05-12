@@ -2,14 +2,14 @@
 #'
 #' Sets global variables about specific genome build and number of threads to utilze on the machine.
 #'
-#' @param arrow.file.dir 
-#' @param cell.annotation.file Cell annotation file (.csv, .feather) that 
+#' @param arrow.file.dir Directory where all the Arrow files are stored 
+#' @param cell.annotation.file File that contains sample_id and additional cell annotations to append to the ArchRProject
 #' @param archr.proj An already setup ArchR project or a string to build a new ArchR project.
 #' @param ... Additional parameters to ArchRProject()
-#'
+#' 
 #' @return None
 #'
-#' @internal
+#' @keywords internal
 build = function(arrow.file.dir, cell.annotation.file, archr.proj="peakCallingPipeline", ...){
 
     ## Build ArchRProject 
@@ -23,7 +23,7 @@ build = function(arrow.file.dir, cell.annotation.file, archr.proj="peakCallingPi
         if(length(arrow.files) == 0){stop("No arrow files found, please check input.")}
 
         ## Assemble ArchR project from Arrow files
-        archr.proj = ArchR::ArchRProject(
+        archr.proj = ArchRProject(
             ArrowFiles = arrow.files, 
             outputDirectory = archr.proj,
             copyArrows = TRUE,

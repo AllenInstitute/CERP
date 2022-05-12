@@ -5,8 +5,8 @@
 #' 
 #' @return archr.proj with coverages calculated for variable of interest
 #'
-#' @internal
-GroupCoverage<-function(archr.proj, groupBy, ...){
+#' @keywords internal
+groupCoverage<-function(archr.proj, groupBy, ...){
   
   print(paste("Creating Group Coverages by: ", groupBy))
   
