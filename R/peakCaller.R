@@ -61,8 +61,8 @@ peakCaller = function(archr.proj, archr.genome, groupBy, archr.threads=4,
 
     ##
     print("Identifying marker peaks")
-    marker.peaks = markerPeaks(archr.proj = archr.proj,
-                               groupBy = groupBy)
+    markerPeaks(archr.proj = archr.proj,
+                groupBy = groupBy)
 
     ##
     print("Producing bigwig and fragment files")
@@ -71,6 +71,5 @@ peakCaller = function(archr.proj, archr.genome, groupBy, archr.threads=4,
                     archr.visualize = archr.visualize)
 
     ##
-    return.obj = list(archr.proj, marker.peaks); names(return.obj) = c("ArchRProject", "markerPeaks")
-    return(return.obj)
+    return(archr.proj)
 }

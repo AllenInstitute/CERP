@@ -1,6 +1,6 @@
 #' Check and sanatize user input
 #'
-#' @keywords int
+#' @keywords internal
 .run_checks = function(){
     .checkMACS2() ## Check that we can load peak caller
 }

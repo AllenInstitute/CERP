@@ -9,4 +9,4 @@
 \description{
 Check and sanatize user input
 }
-\keyword{int}
+\keyword{internal}
