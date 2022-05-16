@@ -11,7 +11,7 @@
 markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks"){
 
   ## Stat. test for marker peaks
-  marker_features  =  getMarkerFeatures(archr.proj = archr.proj, 
+  marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 
                                         useMatrix = "PeakMatrix", 
                                         groupBy = groupBy)
 

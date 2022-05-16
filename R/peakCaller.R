@@ -67,8 +67,7 @@ peakCaller = function(archr.proj, archr.genome, groupBy, archr.threads=4,
     ##
     print("Producing bigwig and fragment files")
     generateBigWigs(archr.proj = archr.proj,
-                    groupBy = groupBy,
-                    archr.visualize = archr.visualize)
+                    groupBy = groupBy)
 
     ##
     return(archr.proj)
