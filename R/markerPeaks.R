@@ -26,7 +26,7 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
                                       plotLog2FC = TRUE)
 
     ##
-    plotPDF(heatmapPeaks, name = paste0(groupBy,"_marker_peaks.pdf"), width = 16, height = 12, archr.proj = archr.proj, addDOC = FALSE)
+    plotPDF(heatmapPeaks, name = paste0(groupBy,"_marker_peaks.pdf"), width = 16, height = 12, ArchRProj = archr.proj, addDOC = FALSE)
   }
 
   ## Create new directory under ArchR project for marker peak results
