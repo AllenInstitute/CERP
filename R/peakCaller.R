@@ -29,7 +29,17 @@ peakCaller = function(archr.proj, archr.genome, groupBy, archr.threads=4,
 
     ## Run basic checks before getting to far.
     .run_checks()
-
+    
+    ##unique_peak_calling_id
+  
+    start_time = Sys.time()
+    unique_id = gsub(start_time,pattern = " ",replacement = "")
+    unique_id = gsub(unique_id,pattern = "PDT",replacement = "")
+    unique_id = gsub(unique_id,pattern = "-",replacement = "")
+    unique_id = gsub(unique_id,pattern = ":",replacement = "")
+    print(paste0("unique_ID for this run:", unique_id))
+  
+  
     ##
     print("Running initial ArchR setup")
     setup(archr.genome = archr.genome,
