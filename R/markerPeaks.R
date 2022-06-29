@@ -8,7 +8,7 @@
 #' @return archr.proj, statistically significant peaks, peak matrix 
 #' 
 #' @keywords internal
-markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks"){
+markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", unique_id = NULL){
 
   ## Stat. test for marker peaks
   marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 
@@ -20,6 +20,9 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
   
   ## add genome_coordinates
   marker.list$genome_coordinates = paste0(marker.list$seqnames,":",marker.list$start,"-",marker.list$end)
+  
+  ## add unique id
+  marker.list$unique_id = paste0(unique_id)
   
   ## Plot marker peaks
   if(archr.visualize){
