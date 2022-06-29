@@ -30,6 +30,7 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
   }
 
   ## Create new directory under ArchR project for marker peak results
+  dir.create(file.path(getOutputDirectory(archr.proj), output.dir), showWarnings = FALSE)
   dir.create(file.path(getOutputDirectory(archr.proj), output.dir, groupBy), showWarnings = FALSE)
 
   ## Save marker peaks
