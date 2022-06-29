@@ -72,7 +72,7 @@ peakCaller = function(archr.proj, archr.genome, groupBy, archr.threads=4,
     ##
     print("Identifying marker peaks")
     markerPeaks(archr.proj = archr.proj,
-                groupBy = groupBy)
+                groupBy = groupBy, unique.id = unique_id)
 
     ##
     print("Producing bigwig and fragment files")
