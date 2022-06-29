@@ -8,7 +8,7 @@
 #' @return archr.proj, statistically significant peaks, peak matrix 
 #' 
 #' @keywords internal
-markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", unique_id = NULL){
+markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", unique.id = NULL){
 
   ## Stat. test for marker peaks
   marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 
