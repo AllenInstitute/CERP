@@ -17,7 +17,10 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
 
   ## Extract marker peaks 
   marker.list = as.data.table(getMarkers(marker_features))
-
+  
+  ## add genome_coordinates
+  marker.list$genome_coordinates = paste0(marker.list$seqnames,":",marker.list$start,"-",marker.list$end)
+  
   ## Plot marker peaks
   if(archr.visualize){
     heatmapPeaks  = plotMarkerHeatmap(seMarker = marker_features, 
