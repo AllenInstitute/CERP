@@ -22,7 +22,7 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
   marker.list$genome_coordinates = paste0(marker.list$seqnames,":",marker.list$start,"-",marker.list$end)
   
   ## add unique id
-  marker.list$unique_id = paste0(unique_id)
+  marker.list$unique.id = paste0(unique.id)
   
   ## Plot marker peaks
   if(archr.visualize){

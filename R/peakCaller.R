@@ -33,12 +33,11 @@ peakCaller = function(archr.proj, archr.genome, groupBy, archr.threads=4,
     ##unique_peak_calling_id
   
     start_time = Sys.time()
-    unique_id = gsub(start_time,pattern = " ",replacement = "")
-    unique_id = gsub(unique_id,pattern = "PDT",replacement = "")
-    unique_id = gsub(unique_id,pattern = "-",replacement = "")
-    unique_id = gsub(unique_id,pattern = ":",replacement = "")
-    print(paste0("unique_ID for this run:", unique_id))
-  
+    unique.id = gsub(start_time,pattern = " ",replacement = "")
+    unique.id = gsub(unique.id,pattern = "PDT",replacement = "")
+    unique.id = gsub(unique.id,pattern = "-",replacement = "")
+    unique.id = gsub(unique.id,pattern = ":",replacement = "")
+    print(paste0("unique.id for this run:", unique.id))
   
     ##
     print("Running initial ArchR setup")
@@ -72,7 +71,8 @@ peakCaller = function(archr.proj, archr.genome, groupBy, archr.threads=4,
     ##
     print("Identifying marker peaks")
     markerPeaks(archr.proj = archr.proj,
-                groupBy = groupBy, unique.id = unique_id)
+                groupBy = groupBy, 
+                unique.id = unique.id)
 
     ##
     print("Producing bigwig and fragment files")
