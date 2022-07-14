@@ -8,7 +8,7 @@
 
 To run the pipeline load the conda env that contains all the dependencies and the peakCallingPipeline:
 ```
-$ conda activate /allen/programs/celltypes/workgroups/hct/conda_envs/atac
+$ conda activate /allen/programs/celltypes/workgroups/hct/conda_envs/peak_caller
 ```
 
 ## Example: R
