@@ -21,7 +21,7 @@ markerPeaks(
 \item{output.dir}{ArchR directory in which to save marker peak file}
 }
 \value{
-archr.proj, statistically significant peaks, peak matrix
+marker peak table
 }
 \description{
 Function to calculate and export marker peaks. Exports

@@ -8,6 +8,7 @@ peakCaller(
   archr.proj,
   archr.genome,
   groupBy,
+  dataset,
   archr.threads = 4,
   arrow.file.dir = NULL,
   cell.annotation.file = NULL,
@@ -17,8 +18,11 @@ peakCaller(
   tileSize = 25,
   normMethod = "ReadsInTSS",
   maxCells = NULL,
-  archr.visualize = TRUE,
-  output.folder = NULL
+  archr.visualize = FALSE,
+  output.folder = NULL,
+  publish = NULL,
+  ucsc.user = NULL,
+  ucsc.session = NULL
 )
 }
 \arguments{
@@ -27,6 +31,8 @@ peakCaller(
 \item{archr.genome}{Valid genome name for ArchR: mm10, hg38}
 
 \item{groupBy}{Metadata field to group cells by}
+
+\item{dataset}{Information about the dataset that these marker peaks belong to. E.g. Brain region, etc.}
 
 \item{archr.threads}{Number of threads to utilize, warning increases memory usage as well.}
 
@@ -49,6 +55,12 @@ peakCaller(
 \item{archr.visualize}{Should marker peak visualizations be produced}
 
 \item{output.folder}{If supplied we will save the marker peak table and ArchRProject to this location.}
+
+\item{publish}{Set to 'TRUE' if you are ready to make the marker peak table viewable on Shiny.}
+
+\item{ucsc.user}{A ucsc genome browser user/account which to contains the session to build links from.}
+
+\item{ucsc.session}{A registred session for the UCSC genome browser user/account specified in \code{ucsc.user}.}
 }
 \value{
 ArchRProject, markerPeaks

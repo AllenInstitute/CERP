@@ -5,10 +5,10 @@
 #' @param archr.visualize Should marker peak visualizations be produced
 #' @param output.dir ArchR directory in which to save marker peak file
 #'
-#' @return archr.proj, statistically significant peaks, peak matrix 
+#' @return marker peak table
 #' 
 #' @keywords internal
-markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", unique.id = NULL){
+markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks"){
 
   ## Stat. test for marker peaks
   marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 
@@ -17,13 +17,7 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
 
   ## Extract marker peaks 
   marker.list = as.data.table(getMarkers(marker_features))
-  
-  ## add genome_coordinates
-  marker.list$genome_coordinates = paste0(marker.list$seqnames,":",marker.list$start,"-",marker.list$end)
-  
-  ## add unique id
-  marker.list$unique.id = paste0(unique.id)
-  
+
   ## Plot marker peaks
   if(archr.visualize){
     heatmapPeaks  = plotMarkerHeatmap(seMarker = marker_features, 
@@ -32,14 +26,19 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
                                       plotLog2FC = TRUE)
 
     ##
-    plotPDF(heatmapPeaks, name = paste0(groupBy,"_marker_peaks.pdf"), width = 16, height = 12, ArchRProj = archr.proj, addDOC = FALSE)
+    plotPDF(heatmapPeaks, name = paste0(groupBy,"_marker_peaks.pdf"), width = 16, height = 12, archr.proj = archr.proj, addDOC = FALSE)
   }
 
   ## Create new directory under ArchR project for marker peak results
-  dir.create(file.path(getOutputDirectory(archr.proj), output.dir), showWarnings = FALSE)
   dir.create(file.path(getOutputDirectory(archr.proj), output.dir, groupBy), showWarnings = FALSE)
 
   ## Save marker peaks
   marker.file = file.path(getOutputDirectory(archr.proj), output.dir, groupBy, paste0(groupBy, "_markerPeaks.tsv"))
   write.table(marker.list, file=marker.file, sep="\t", row.names=FALSE)
+
+  ## Record marker list
+  if(is.null(archr.proj@projectMetadata$markerPeaks)){ archr.proj@projectMetadata$markerPeaks = list() }
+  archr.proj@projectMetadata$markerPeaks[[paste0(groupBy, "_markerPeaks")]] = marker.list
+
+  return(marker.list)
 }

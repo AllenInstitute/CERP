@@ -16,7 +16,8 @@ License: GPL-3
 Depends: ArchR,
     parallel,
     data.table,
-    assertthat
+    assertthat,
+    dplyr
 Suggests: knitr,
     rmarkdown, 
     testthat
