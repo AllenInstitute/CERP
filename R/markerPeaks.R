@@ -8,12 +8,18 @@
 #' @return marker peak table
 #' 
 #' @keywords internal
-markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks"){
+markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", min_cells = 10){
+
+  
+  metadata = as.data.table(getCellColData(arch))
+  counts = data.frame(metadata[,.N, by = groupBy])
+  groups = counts[counts$N > min_cells,groupBy] #get groups that have more than min_cells
 
   ## Stat. test for marker peaks
   marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 
                                         useMatrix = "PeakMatrix", 
-                                        groupBy = groupBy)
+                                        groupBy = groupBy,
+                                        useGroups = groups)
 
   ## Extract marker peaks 
   marker.list = as.data.table(getMarkers(marker_features))
