@@ -90,7 +90,8 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                             groupBy = groupBy)
 
             ## Return the archr.proj outside of try-catch
-            archr.proj
+           saveArchRProject(archr.proj)  
+           archr.proj
         }, error=function(error) {
             message(error)
         }, finally={ print("Exiting pipeline."); return(archr.proj) }
