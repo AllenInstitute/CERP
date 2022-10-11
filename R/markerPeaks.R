@@ -11,7 +11,7 @@
 markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", min_cells = 10){
 
   
-  metadata = as.data.table(getCellColData(arch))
+  metadata = as.data.table(getCellColData(archr.proj))
   counts = data.frame(metadata[,.N, by = groupBy])
   groups = counts[counts$N > min_cells,groupBy] #get groups that have more than min_cells
 
