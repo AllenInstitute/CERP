@@ -4,25 +4,26 @@
 #' @param groupBy Metadata field to group cells by
 #' @param archr.visualize Should marker peak visualizations be produced
 #' @param output.dir ArchR directory in which to save marker peak file
+#' @param unique.id Unique peak calling run ID
 #'
 #' @return marker peak table
 #' 
 #' @keywords internal
-markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", min_cells = 10){
-
-  
-  metadata = as.data.table(getCellColData(archr.proj))
-  counts = data.frame(metadata[,.N, by = groupBy])
-  groups = counts[counts$N > min_cells,groupBy] #get groups that have more than min_cells
+markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="MarkerPeaks", unique.id=NULL){
 
   ## Stat. test for marker peaks
   marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 
                                         useMatrix = "PeakMatrix", 
-                                        groupBy = groupBy,
-                                        useGroups = groups)
+                                        groupBy = groupBy)
 
   ## Extract marker peaks 
   marker.list = as.data.table(getMarkers(marker_features))
+
+  ## add genome_coordinates
+  marker.list$genome_coordinates = paste0(marker.list$seqnames,":",marker.list$start,"-",marker.list$end)
+
+  ## add unique id
+  if(!is.null(unique.id)){ marker.list$unique.id = unique.id }
 
   ## Plot marker peaks
   if(archr.visualize){
@@ -36,7 +37,7 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
   }
 
   ## Create new directory under ArchR project for marker peak results
-  dir.create(file.path(getOutputDirectory(archr.proj), output.dir, groupBy), showWarnings = FALSE, recursive = TRUE)
+  dir.create(file.path(getOutputDirectory(archr.proj), output.dir, groupBy), showWarnings = FALSE, recursive=TRUE)
 
   ## Save marker peaks
   marker.file = file.path(getOutputDirectory(archr.proj), output.dir, groupBy, paste0(groupBy, "_markerPeaks.tsv"))
@@ -46,5 +47,5 @@ markerPeaks = function(archr.proj, groupBy, archr.visualize=TRUE, output.dir="Ma
   if(is.null(archr.proj@projectMetadata$markerPeaks)){ archr.proj@projectMetadata$markerPeaks = list() }
   archr.proj@projectMetadata$markerPeaks[[paste0(groupBy, "_markerPeaks")]] = marker.list
 
-  return(marker.list)
+  return(archr.proj)
 }

@@ -37,6 +37,11 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
             ## Run basic checks before getting to far.
             .run_checks()
 
+            ## unique_peak_calling_id
+            start_time = Sys.time()
+            unique.id = gsub(start_time, pattern = " |PDT|-|:", replacement = "")
+            print(paste0("unique.id for this run:", unique.id))
+
             ##
             print("Running initial ArchR setup")
             setup(archr.genome = archr.genome,
@@ -68,19 +73,20 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
 
             ##
             print("Identifying marker peaks")
-            marker.table = markerPeaks(archr.proj = archr.proj,
-                                       groupBy = groupBy)
+            archr.proj = markerPeaks(archr.proj = archr.proj,
+                                     groupBy = groupBy, 
+                                     unique.id = unique.id)
 
             ## Record marker table location 
-            archr.proj@projectMetadata[[paste0("loc_marker_table_",groupBy)]] = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy)
+            archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]] = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy)
 
             ##
-            annotatePeaks(marker.table = marker.table, 
+            annotatePeaks(marker.table = archr.proj@projectMetadata$markerPeaks[[paste0(groupBy, "_markerPeaks")]], 
                         archr.proj = archr.proj, 
                         groupBy = groupBy, 
                         dataset = dataset,
                         publish = publish,
-                        filename=file.path(archr.proj@projectMetadata[[paste0("loc_marker_table_",groupBy)]], paste0(groupBy, "_annotated_markerPeaks.tsv")),
+                        filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),
                         ucsc.user = ucsc.user,
                         ucsc.session = ucsc.session)
 
@@ -90,10 +96,13 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                             groupBy = groupBy)
 
             ## Return the archr.proj outside of try-catch
-           saveArchRProject(archr.proj)  
-           archr.proj
+            archr.proj
         }, error=function(error) {
             message(error)
-        }, finally={ print("Exiting pipeline."); return(archr.proj) }
-    )    
+            return(archr.proj)
+        }, finally={ 
+            print("Done!") 
+            return(archr.proj) 
+        }
+    )
 }

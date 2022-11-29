@@ -8,7 +8,8 @@ markerPeaks(
   archr.proj,
   groupBy,
   archr.visualize = TRUE,
-  output.dir = "MarkerPeaks"
+  output.dir = "MarkerPeaks",
+  unique.id = NULL
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ markerPeaks(
 \item{archr.visualize}{Should marker peak visualizations be produced}
 
 \item{output.dir}{ArchR directory in which to save marker peak file}
+
+\item{unique.id}{Unique peak calling run ID}
 }
 \value{
 marker peak table

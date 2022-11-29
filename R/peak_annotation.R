@@ -73,7 +73,7 @@ annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, fi
 
     ## Save the 
     if(!is.null(filename)){
-        write.table(marker.reporting, row.names=F, col.names=T, file=filename)
+        write.table(marker.reporting, row.names=F, col.names=T, sep="\t", file=filename)
     }
 
     ##
