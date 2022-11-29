@@ -13,7 +13,7 @@ The main CERP function `peakCaller` returns an ArchR object that contains the re
 CERP creats the following files/directories:
 
 1. `MarkerPeaks`: Directory under the ArchR project folder, contains marker peak .tsv for each annotation level.
-2. `bigwig`: Directory under the ArchR project folder, contains bigwigs for each annotation level.
+2. `GroupBigWigs`: Directory under the ArchR project folder, contains bigwigs for each annotation level.
 
 ### ArchR project additions
 
