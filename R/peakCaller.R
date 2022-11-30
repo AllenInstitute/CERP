@@ -102,7 +102,9 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
             return(archr.proj)
         }, finally={ 
             print("Done!") 
-            return(archr.proj) 
+            ## Save project
+            saveArchRProject(archr.proj)
         }
     )
+    return(archr.proj) 
 }
