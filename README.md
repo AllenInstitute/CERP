@@ -27,7 +27,7 @@ CERP adds additional fields to: `archr.proj@projectMetadata` specifically:
 To setup the peak calling pipeline, start by cloning it in your server.
 
 ```
-git clone https://github.com/AllenInstitute/peakCallingPipeline
+git clone https://github.com/AllenInstitute/Cross-species-Enhancer-Ranking-Pipeline
 ```
 
 Next, load the conda env that contains all the dependencies for this pipeline:
