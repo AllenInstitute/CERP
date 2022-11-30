@@ -1,4 +1,4 @@
-# crossSpeciesEnhancerRankingPipeline
+# crossSpeciesEnhancerRankingPipeline (CERP)
 
 ## Introduction
 
