@@ -1,4 +1,4 @@
-Package: peakCallingPipeline
+Package: crossSpeciesEnhancerRankingPipeline
 Title: Call peaks for variety of ATAC-Seq data
 Version: 0.1
 Authors@R: 
