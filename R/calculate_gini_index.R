@@ -15,7 +15,6 @@ library(parallel)
 library(data.table)
 library(DescTools)
 library(ArchR)
-library(crossSpeciesEnhancerRankingPipeline)
 library(doParallel)
 
 #main function for returning markerpeaks with gini indexes
