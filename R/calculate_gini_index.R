@@ -70,7 +70,7 @@ calculate_gini_index = function(archr.proj,
   gini_indexes = data.table(rbindlist(gini_indexes))
   marker_peaks = as.data.table(marker_peaks)
   gini_indexes$coordinates = gini_indexes$peak
-  marker_peaks = merge.data.table(marker_peaks, gini_indexes, by = "coordinates")
+  marker_peaks = merge.data.table(marker_peaks, gini_indexes[,.(coordinates,peak_signal_total,gini_index], by = "coordinates")
   
   if(!is.null(filename)){
     write.table(marker_peaks, row.names=F, col.names=T, sep="\t", file=filename)
