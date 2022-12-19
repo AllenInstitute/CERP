@@ -9,12 +9,10 @@
 
 library(ArchR)
 library(BSgenome.Mmusculus.UCSC.mm10)
-library(ArchR)
 library(compiler)
 library(parallel)
 library(data.table)
 library(DescTools)
-library(ArchR)
 library(doParallel)
 
 #main function for returning markerpeaks with gini indexes
