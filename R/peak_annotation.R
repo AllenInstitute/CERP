@@ -68,7 +68,7 @@ annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, fi
 
     ##
     if(publish == TRUE){
-        write.table(marker.reporting, row.names=F, col.names=T, file=paste0(groupBy, "_annotated_markerPeaks.tsv"))
+        write.table(marker.reporting, row.names=FALSE, col.names=TRUE, file=paste0(groupBy, "_annotated_markerPeaks.tsv"))
     }
 
     ## Save the 

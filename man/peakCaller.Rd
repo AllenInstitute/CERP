@@ -20,7 +20,7 @@ peakCaller(
   maxCells = NULL,
   archr.visualize = FALSE,
   output.folder = NULL,
-  publish = NULL,
+  publish = FALSE,
   ucsc.user = NULL,
   ucsc.session = NULL
 )

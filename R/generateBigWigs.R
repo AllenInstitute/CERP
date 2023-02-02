@@ -12,7 +12,6 @@
 #'
 #' @keywords internal
 generateBigWigs = function(archr.proj, groupBy, tileSize=25, normMethod="ReadsInTSS", maxCells=NULL){
-
   ## Build BigWig files post group coverage
   getGroupBW(
     ArchRProj = archr.proj,
@@ -25,6 +24,4 @@ generateBigWigs = function(archr.proj, groupBy, tileSize=25, normMethod="ReadsIn
     threads = getArchRThreads(),
     logFile = createLogFile("getGroupBW")
   )
-
-  ## Generate fragment files
 }

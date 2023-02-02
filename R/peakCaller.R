@@ -28,20 +28,22 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                       arrow.file.dir=NULL, cell.annotation.file=NULL,
                       archr.clustering=FALSE, varFeatures=15000, resolution=c(0.2,1,2), 
                       tileSize=25, normMethod="ReadsInTSS", maxCells=NULL,              
-                      archr.visualize=FALSE, output.folder=NULL, publish=NULL, ucsc.user=NULL, ucsc.session=NULL,
-                      calculate_gini_index = FALSE
+                      archr.visualize=FALSE, output.folder=NULL, publish=FALSE, ucsc.user=NULL, ucsc.session=NULL                          
                       ){
 
     ## Error handling
     archr.proj = tryCatch({
 
             ## Run basic checks before getting to far.
-            .run_checks()
+            #.run_checks()
 
             ## unique_peak_calling_id
             start_time = Sys.time()
             unique.id = gsub(start_time, pattern = " |PDT|-|:", replacement = "")
             print(paste0("unique.id for this run:", unique.id))
+
+            ## Create new directory under ArchR project for marker peak results
+            dir.create(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), showWarnings = TRUE, recursive=TRUE)
 
             ##
             print("Running initial ArchR setup")
@@ -70,7 +72,7 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
             ##
             print("Calling peaks")
             archr.proj = peakCalling(archr.proj = archr.proj,
-                                    groupBy = groupBy)
+                                     groupBy = groupBy)
 
             ##
             print("Identifying marker peaks")
@@ -79,10 +81,19 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                                      unique.id = unique.id)
 
             ## Record marker table location 
-            archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]] = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy)
+            archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]] = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy, paste0(groupBy, "_markerPeaks.tsv"))
 
             ##
-            annotatePeaks(marker.table = archr.proj@projectMetadata$markerPeaks[[paste0(groupBy, "_markerPeaks")]], 
+            if(!is.null(archr.proj@projectMetadata[[paste0(groupBy, "_markerPeaks")]])){
+                print("Loading from project")
+                marker.table = archr.proj@projectMetadata[[paste0(groupBy, "_markerPeaks")]]
+            }else{
+                print("Loading from csv")
+                marker.table = read.csv(archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]])
+            }
+
+            ##
+            annotatePeaks(marker.table = marker.table, 
                         archr.proj = archr.proj, 
                         groupBy = groupBy, 
                         dataset = dataset,
@@ -92,12 +103,6 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                         ucsc.session = ucsc.session)
 
             ##
-            #calculate gini index for each marker peak
-            if(calculate_gini_index == TRUE){
-              calculate_gini_index(archr.proj = archr.proj,
-                     groupBy = groupBy,filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),
-                     max_sample_size = 500)
-              }
             print("Producing bigwig and fragment files")
             generateBigWigs(archr.proj = archr.proj,
                             groupBy = groupBy)

@@ -1,5 +1,5 @@
-Package: crossSpeciesEnhancerRankingPipeline
-Title: Call peaks for variety of ATAC-Seq data
+Package: CERP
+Title: cross-species Enhancer Ranking Pipeline (CERP): Call peaks for variety of ATAC-Seq data
 Version: 0.1
 Authors@R: 
     person(given = "Nelson",

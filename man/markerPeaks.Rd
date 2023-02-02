@@ -4,22 +4,12 @@
 \alias{markerPeaks}
 \title{Function to calculate and export marker peaks. Exports}
 \usage{
-markerPeaks(
-  archr.proj,
-  groupBy,
-  archr.visualize = TRUE,
-  output.dir = "MarkerPeaks",
-  unique.id = NULL
-)
+markerPeaks(archr.proj, groupBy, unique.id = NULL)
 }
 \arguments{
 \item{archr.proj}{ArchR object with peaks called}
 
 \item{groupBy}{Metadata field to group cells by}
-
-\item{archr.visualize}{Should marker peak visualizations be produced}
-
-\item{output.dir}{ArchR directory in which to save marker peak file}
 
 \item{unique.id}{Unique peak calling run ID}
 }
