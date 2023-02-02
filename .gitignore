@@ -13,7 +13,6 @@
 *-Ex.R
 
 # Pdf/jpg
-*.pdf
 *.jpg
 
 # Output files from R CMD build
