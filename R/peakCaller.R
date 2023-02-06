@@ -103,6 +103,14 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                         ucsc.session = ucsc.session)
 
             ##
+            #calculate gini index for each marker peak
+            if(calculate_gini_index == TRUE){
+              calculate_gini_index(archr.proj = archr.proj,
+                     groupBy = groupBy,filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),
+                     max_sample_size = 500)
+            }
+
+            ##
             print("Producing bigwig and fragment files")
             generateBigWigs(archr.proj = archr.proj,
                             groupBy = groupBy)
