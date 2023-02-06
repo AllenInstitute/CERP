@@ -20,6 +20,7 @@
 #' @param publish Set to 'TRUE' if you are ready to make the marker peak table viewable on Shiny.
 #' @param ucsc.user A ucsc genome browser user/account which to contains the session to build links from.
 #' @param ucsc.session A registred session for the UCSC genome browser user/account specified in `ucsc.user`.
+#' @param calculate_gini_index ADD INFO
 #' 
 #' @return ArchRProject, markerPeaks
 #'
@@ -28,7 +29,8 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                       arrow.file.dir=NULL, cell.annotation.file=NULL,
                       archr.clustering=FALSE, varFeatures=15000, resolution=c(0.2,1,2), 
                       tileSize=25, normMethod="ReadsInTSS", maxCells=NULL,              
-                      archr.visualize=FALSE, output.folder=NULL, publish=FALSE, ucsc.user=NULL, ucsc.session=NULL                          
+                      archr.visualize=FALSE, output.folder=NULL, publish=NULL, ucsc.user=NULL, ucsc.session=NULL,
+                      calculate_gini_index = FALSE
                       ){
 
     ## Error handling
