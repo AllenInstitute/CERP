@@ -75,3 +75,41 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
       marker.table = read.csv(archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]])
     }
     
+    ##
+    annotatePeaks(marker.table = marker.table, 
+                  archr.proj = archr.proj, 
+                  groupBy = groupBy, 
+                  dataset = dataset,
+                  publish = publish,
+                  filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),
+                  ucsc.user = ucsc.user,
+                  ucsc.session = ucsc.session)
+    #p2gene
+
+    if(calculate_p2gene == TRUE){
+
+    archr.proj = peak_to_Gene(archr.proj = archr.proj,max_distance = max_distance, reduced_dims = "LSI_Combined", useMatrix = "GeneExpressionMatrix",
+                     marker.file = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")))
+      
+    }#end p2gene
+
+    
+    ##
+    addArchRThreads(1)
+    print("Producing bigwig and fragment files")
+    generateBigWigs(archr.proj = archr.proj,
+                    groupBy = groupBy)
+    
+    ## Return the archr.proj outside of try-catch
+    archr.proj
+  }, error=function(error) {
+    message(error)
+    return(archr.proj)
+  }, finally={ 
+    print("Done!") 
+    ## Save project
+    saveArchRProject(archr.proj)
+  }
+  )
+  return(archr.proj) 
+}
