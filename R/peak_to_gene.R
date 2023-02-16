@@ -47,7 +47,7 @@ add_gex_and_LSI = function(archr.proj = NULL ){
       h5paths = paste0(unique(archr.proj$ar_directory), unique(archr.proj$ar_id), "/", 'outs/filtered_feature_bc_matrix.h5')
       seRNA = import10xFeatureMatrix(input = h5paths, names = unique(archr.proj$Sample),strictMatch = F)
       seRNA = seRNA[,colnames(seRNA) %in% archr.proj$cellNames]
-      archr.proj <- addGeneExpressionMatrix(input = archr.proj, seRNA = seRNA, force = TRUE,strictMatch = F)  #error unused argument strictMatch = F strictMatch
+      archr.proj <- addGeneExpressionMatrix(input = archr.proj, seRNA = seRNA, force = TRUE,strictMatch = T)  #error unused argument strictMatch = F strictMatch
       
       # Perform LSI on both modalities and then combine -------------------------
       archr.proj <- addIterativeLSI(ArchRProj = archr.proj,
