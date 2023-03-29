@@ -20,6 +20,9 @@
 #' @param publish Set to 'TRUE' if you are ready to make the marker peak table viewable on Shiny.
 #' @param ucsc.user A ucsc genome browser user/account which to contains the session to build links from.
 #' @param ucsc.session A registred session for the UCSC genome browser user/account specified in `ucsc.user`.
+#' @param calculate_gini_index ADD INFO
+#' @param calculate_peak2gene ADD INFO
+#' @param max_distance ADD INFO
 #' 
 #' @return ArchRProject, markerPeaks
 #'
@@ -28,8 +31,9 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                       arrow.file.dir=NULL, cell.annotation.file=NULL,
                       archr.clustering=FALSE, varFeatures=15000, resolution=c(0.2,1,2), 
                       tileSize=25, normMethod="ReadsInTSS", maxCells=NULL,              
-                      archr.visualize=FALSE, output.folder=NULL, publish=FALSE, ucsc.user=NULL, ucsc.session=NULL                          
-                      ){
+                      archr.visualize=FALSE, output.folder=NULL, publish=NULL, ucsc.user=NULL, ucsc.session=NULL,
+                      calculate_gini_index = FALSE, calculate_peak2gene = FALSE,
+                      max_distance = 250000, ){
 
     ## Error handling
     archr.proj = tryCatch({
@@ -101,6 +105,21 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                         filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),
                         ucsc.user = ucsc.user,
                         ucsc.session = ucsc.session)
+
+            ## Calculate gini index for each marker peak
+            if(calculate_gini_index == TRUE){
+              calculate_gini_index(archr.proj = archr.proj,
+                     groupBy = groupBy,filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),
+                     max_sample_size = 500)
+            }
+
+            ## Peak to gene
+            if(calculate_peak2gene == TRUE){
+                archr.proj = peak_to_gene(archr.proj = archr.proj,
+                                            max_distance = max_distance, 
+                                            reduced_dims = "LSI_Combined", 
+                                            useMatrix = "GeneExpressionMatrix")
+            }
 
             ##
             print("Producing bigwig and fragment files")
