@@ -33,7 +33,7 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                       tileSize=25, normMethod="ReadsInTSS", maxCells=NULL,              
                       archr.visualize=FALSE, output.folder=NULL, publish=NULL, ucsc.user=NULL, ucsc.session=NULL,
                       calculate_gini_index = FALSE, calculate_peak2gene = FALSE,
-                      max_distance = 250000, ){
+                      max_distance = 250000){
 
     ## Error handling
     archr.proj = tryCatch({

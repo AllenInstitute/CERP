@@ -10,7 +10,7 @@
 #'
 #' @keywords internal
 peak_to_gene = function(archr.proj = NULL, max_distance = 250000, reduced_dims = "LSI_Combined", useMatrix = "GeneExpressionMatrix",
-                        marker.file = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")){
+                        marker.file = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy, paste0(groupBy, "_annotated_markerPeaks.tsv"))){ 
 
     ## Ensure annotated peak file exists
     if(!file.exists(marker.file)){print("No peak annotation file exists, please check that CERP has run properly"); return(archr.proj)}

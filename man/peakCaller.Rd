@@ -20,9 +20,12 @@ peakCaller(
   maxCells = NULL,
   archr.visualize = FALSE,
   output.folder = NULL,
-  publish = FALSE,
+  publish = NULL,
   ucsc.user = NULL,
-  ucsc.session = NULL
+  ucsc.session = NULL,
+  calculate_gini_index = FALSE,
+  calculate_peak2gene = FALSE,
+  max_distance = 250000
 )
 }
 \arguments{
@@ -61,6 +64,12 @@ peakCaller(
 \item{ucsc.user}{A ucsc genome browser user/account which to contains the session to build links from.}
 
 \item{ucsc.session}{A registred session for the UCSC genome browser user/account specified in \code{ucsc.user}.}
+
+\item{calculate_gini_index}{ADD INFO}
+
+\item{calculate_peak2gene}{ADD INFO}
+
+\item{max_distance}{ADD INFO}
 }
 \value{
 ArchRProject, markerPeaks
