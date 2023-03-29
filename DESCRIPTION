@@ -15,9 +15,12 @@ Description: ADD
 License: GPL-3
 Depends: ArchR,
     parallel,
+    doParallel,
     data.table,
     assertthat,
-    dplyr
+    dplyr,
+    compiler, 
+    DescTools
 Suggests: knitr,
     rmarkdown, 
     testthat
