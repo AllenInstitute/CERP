@@ -30,8 +30,7 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                       archr.clustering=FALSE, varFeatures=15000, resolution=c(0.2,1,2), 
                       tileSize=25, normMethod="ReadsInTSS", maxCells=NULL,              
                       archr.visualize=FALSE, output.folder=NULL, publish=NULL, ucsc.user=NULL, ucsc.session=NULL,
-                      calculate_gini_index = FALSE
-                      ){
+                      calculate_gini_index = FALSE){
 
     ## Error handling
     archr.proj = tryCatch({
@@ -104,8 +103,7 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                         ucsc.user = ucsc.user,
                         ucsc.session = ucsc.session)
 
-            ##
-            #calculate gini index for each marker peak
+            ## Calculate gini index for each marker peak
             if(calculate_gini_index == TRUE){
               calculate_gini_index(archr.proj = archr.proj,
                      groupBy = groupBy,filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),

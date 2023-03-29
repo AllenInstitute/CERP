@@ -66,17 +66,17 @@ annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, fi
         marker.reporting$genome_track = paste0("https://genome.ucsc.edu/s/", ucsc.user, "/", ucsc.session, "?position=", marker.reporting$chr, ":", marker.reporting$start, "-", marker.reporting$end)
     }
 
-    ##
-    if(publish == TRUE){
-        write.table(marker.reporting, row.names=FALSE, col.names=TRUE, file=paste0(groupBy, "_annotated_markerPeaks.tsv"))
-    }
+    # ##
+    # if(publish == TRUE){
+    #     write.table(marker.reporting, row.names=FALSE, col.names=TRUE, file=paste0(groupBy, "_annotated_markerPeaks.tsv"))
+    # }
 
     ## Save the 
     if(!is.null(filename)){
         write.table(marker.reporting, row.names=F, col.names=T, sep="\t", file=filename)
     }
 
-    ##
+    ## Save marker peaks into ArchR project
     if(is.null(archr.proj@projectMetadata$markerAnnotatedPeaks)){ archr.proj@projectMetadata$markerAnnotatedPeaks = list() }
     archr.proj@projectMetadata$markerAnnotatedPeaks[[paste0(groupBy, "_markerPeaks")]] = marker.reporting
 }
