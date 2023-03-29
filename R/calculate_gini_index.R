@@ -124,4 +124,4 @@ get_gini_index_peak = function(peak_index, peak_matrix){
   peak_signal_by_group$gini_index = rep(Gini(x = peak_signal_by_group$peak_signal_group, n = peak_signal_by_group$cells_per_group),length(peak_signal_by_group$cell.population))
   return(peak_signal_by_group[1,.(peak,peak_signal_total,gini_index)])
 }
-get_gini_index_peak = cmpfun(get_gini_index_peak)
+# get_gini_index_peak = cmpfun(get_gini_index_peak)
