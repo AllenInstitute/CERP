@@ -92,10 +92,9 @@ peakCaller = function(archr.proj, archr.genome, groupBy, dataset, archr.threads=
                 print("Loading from project")
                 marker.table = archr.proj@projectMetadata[[paste0(groupBy, "_markerPeaks")]]
             }else{
-                print("Loading from csv")
-                marker.table = read.csv(archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]])
+                print("Loading from tsv")
+                marker.table = read.table(archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]], sep = "\t")
             }
-
             ##
             annotatePeaks(marker.table = marker.table, 
                         archr.proj = archr.proj, 
