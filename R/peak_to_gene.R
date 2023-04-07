@@ -50,7 +50,7 @@ make_p2g_table = function(archr.proj){
     p2geneDF = p2geneDF[,.(coordinates,correlated_gene,Correlation,cor_FDR)]
     p2geneDF = na.omit(p2geneDF)
     ## Load in annotated marker peak table and update
-    write.table(p2geneDF, file = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_peak_to_gene.tsv"), sep = "\t")
+    write.table(p2geneDF, file = paste0(getOutputDirectory(archr.proj), "/MarkerPeaks/", groupBy,"/", paste0(groupBy, "_peak_to_gene.tsv")), sep = "\t")
 }
 
 #' Add gene expression and joint LSI to archr project
