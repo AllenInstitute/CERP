@@ -51,3 +51,5 @@ archr.proj = peakSpecificity(archr.proj,
                              max_sample_size=500)
 saveArchRProject(archr.proj)
 ```
+
+### Outputs of CERP:
