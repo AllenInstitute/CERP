@@ -1,4 +1,4 @@
-# Tutorial: Building a Shiny taxonomy 
+# Tutorial: CERP (v1.5)
 
 In this tutorial we demonstrate how to run CERP (v1.5) to produce annotated marker peak tables.
 
