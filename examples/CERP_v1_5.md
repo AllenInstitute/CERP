@@ -9,10 +9,11 @@ In this tutorial we demonstrate how to run CERP (v1.5) to produce annotated mark
 ### Recommended environment:
 
 * Run CERP on a compute node from HPC to avoid h5 file issues.
-* The BICore hosted cerp docker is compatibile with CERP v1.5.
 
-(non-interactive) singularity exec docker://bicore/cerp:latest YOUR_SCRIPT.R
-(interactive) singularity shell docker://bicore/cerp:latest
+The BICore hosted cerp docker is compatibile with CERP v1.5.
+
+* (non-interactive) singularity exec docker://bicore/cerp:latest YOUR_SCRIPT.R
+* (interactive) singularity shell docker://bicore/cerp:latest
 
 #### Run CERP:
 ```R
