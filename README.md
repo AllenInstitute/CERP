@@ -41,4 +41,4 @@ $ conda activate /allen/programs/celltypes/workgroups/hct/conda_envs/peak_caller
 ```
 
 ## Tutorials
-!["Basics"](https://github.com/AllenInstitute/peakCallingPipeline/blob/main/examples/CERP_v1_5.md)
+[Basic CERP tutorial](https://github.com/AllenInstitute/peakCallingPipeline/blob/main/examples/CERP_v1_5.md)
