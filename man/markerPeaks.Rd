@@ -4,14 +4,12 @@
 \alias{markerPeaks}
 \title{Function to calculate and export marker peaks. Exports}
 \usage{
-markerPeaks(archr.proj, groupBy, unique.id = NULL)
+markerPeaks(archr.proj, groupBy)
 }
 \arguments{
 \item{archr.proj}{ArchR object with peaks called}
 
 \item{groupBy}{Metadata field to group cells by}
-
-\item{unique.id}{Unique peak calling run ID}
 }
 \value{
 marker peak table

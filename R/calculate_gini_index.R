@@ -84,6 +84,9 @@ calculate_gini_index = function(archr.proj,
   if(!is.null(filename)){
     write.table(marker_peaks, row.names=F, col.names=T, sep="\t", file=filename)
   }
+  
+  archr.proj@projectMetadata$markerAnnotatedPeaks[[paste0(groupBy, "_markerPeaks")]] = marker_peaks
+  return(archr.proj)
 }
 
 #' Subsamples cells for gini index calculation

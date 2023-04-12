@@ -2,4 +2,7 @@
 
 export(annotatePeaks)
 export(calculate_gini_index)
+export(peakAnnotation)
 export(peakCaller)
+export(peakSpecificity)
+export(peakToGene)

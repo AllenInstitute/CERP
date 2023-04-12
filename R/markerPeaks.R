@@ -2,12 +2,11 @@
 #'
 #' @param archr.proj ArchR object with peaks called
 #' @param groupBy Metadata field to group cells by
-#' @param unique.id Unique peak calling run ID
 #'
 #' @return marker peak table
 #' 
 #' @keywords internal
-markerPeaks = function(archr.proj, groupBy, unique.id=NULL){
+markerPeaks = function(archr.proj, groupBy){
 
   ## Stat. test for marker peaks
   marker_features  =  getMarkerFeatures(ArchRProj = archr.proj, 

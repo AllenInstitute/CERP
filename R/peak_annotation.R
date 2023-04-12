@@ -79,4 +79,6 @@ annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, fi
     ##
     if(is.null(archr.proj@projectMetadata$markerAnnotatedPeaks)){ archr.proj@projectMetadata$markerAnnotatedPeaks = list() }
     archr.proj@projectMetadata$markerAnnotatedPeaks[[paste0(groupBy, "_markerPeaks")]] = marker.reporting
+
+    return(archr.proj)
 }

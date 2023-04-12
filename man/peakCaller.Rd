@@ -9,7 +9,7 @@ peakCaller(
   archr.genome,
   groupBy,
   dataset,
-  archr.threads = 4,
+  genomeSize = NULL,
   arrow.file.dir = NULL,
   cell.annotation.file = NULL,
   archr.clustering = FALSE,
@@ -18,14 +18,7 @@ peakCaller(
   tileSize = 25,
   normMethod = "ReadsInTSS",
   maxCells = NULL,
-  archr.visualize = FALSE,
-  output.folder = NULL,
-  publish = NULL,
-  ucsc.user = NULL,
-  ucsc.session = NULL,
-  calculate_gini_index = FALSE,
-  calculate_peak2gene = FALSE,
-  max_distance = 250000
+  archr.visualize = FALSE
 )
 }
 \arguments{
@@ -37,7 +30,7 @@ peakCaller(
 
 \item{dataset}{Information about the dataset that these marker peaks belong to. E.g. Brain region, etc.}
 
-\item{archr.threads}{Number of threads to utilize, warning increases memory usage as well.}
+\item{genomeSize}{Number of threads to utilize, warning increases memory usage as well.}
 
 \item{arrow.file.dir}{Directory where all the Arrow files are stored}
 

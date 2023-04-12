@@ -29,8 +29,7 @@ peak_to_gene = function(archr.proj = NULL, max_distance = 250000, reduced_dims =
     archr.proj = addPeak2GeneLinks(ArchRProj = archr.proj, reducedDims = reduced_dims, useMatrix = useMatrix, maxDist = max_distance)
 
     ## Build peak to gene table
-    make_p2g_table(archr.proj = archr.proj)
-
+    archr.proj = make_p2g_table(archr.proj = archr.proj)
     return(archr.proj)
 }
 
