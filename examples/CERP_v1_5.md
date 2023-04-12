@@ -2,7 +2,7 @@
 
 In this tutorial we demonstrate how to run CERP (v1.5) to produce annotated marker peak tables.
 
-#### Required inputs:
+### Required inputs:
 
 * Predefined ArchR project with annotations
 
@@ -15,7 +15,7 @@ The BICore hosted cerp docker is compatibile with CERP v1.5.
 * (non-interactive) singularity exec docker://bicore/cerp:latest YOUR_SCRIPT.R
 * (interactive) singularity shell docker://bicore/cerp:latest
 
-#### Run CERP:
+### Run CERP:
 ```R
 ## Load the relevant libraries
 library(ArchR)
@@ -53,3 +53,7 @@ saveArchRProject(archr.proj)
 ```
 
 ### Outputs of CERP:
+
+In the ArchR folder CERP produces:
+
+* markerPeaks directory within the ArchR project folder with annotated peak tables.
