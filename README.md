@@ -32,7 +32,7 @@ git clone https://github.com/AllenInstitute/CERP
 
 Or install via a local file:
 ```
-install.packages("/home/nelson.johansen/scripts/R/CERP_0.1.tar.gz")
+install.packages("/home/nelson.johansen/scripts/R/github/CERP_0.1.tar.gz")
 ```
 
 Next, load the conda env that contains all the dependencies for this pipeline:
@@ -40,10 +40,5 @@ Next, load the conda env that contains all the dependencies for this pipeline:
 $ conda activate /allen/programs/celltypes/workgroups/hct/conda_envs/peak_caller
 ```
 
-## Example: R
-```
-archr.proj = peakCaller(archr.proj = archr.proj, 
-                        archr.genome="hg38", 
-                        groupBy="subclass", 
-                        dataset="region-information")
-```
+## Tutorials
+!["Basics"](https://github.com/AllenInstitute/peakCallingPipeline/blob/main/examples/CERP_v1_5.md)
