@@ -3,7 +3,6 @@
 #' Sets global variables about specific genome build and number of threads to utilze on the machine.
 #'
 #' @param archr.proj An already setup ArchR project or a name (string) to build a new ArchR project. If passing an already defined archr.proj then arrow.file.dir and cell.annotation.file will not be used.
-#' @param archr.genome Valid genome name for ArchR: mm10, hg38
 #' @param groupBy Metadata field to group cells by
 #' @param dataset Information about the dataset that these marker peaks belong to. E.g. Brain region, etc.
 #' @param genomeSize Number of threads to utilize, warning increases memory usage as well.
@@ -27,7 +26,7 @@
 #' @return ArchRProject, markerPeaks
 #'
 #' @export
-peakCaller = function(archr.proj, archr.genome, groupBy, dataset, 
+peakCaller = function(archr.proj, groupBy, dataset, 
                       genomeSize = NULL,              
                       arrow.file.dir=NULL, 
                       cell.annotation.file=NULL,
