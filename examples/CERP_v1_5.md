@@ -52,11 +52,29 @@ archr.proj = peakAnnotation(archr.proj,
                             ucsc.user = "AIBSMolGen", 
                             ucsc.session = "RELEVANT_UCSC_BROWSER_SESSION")
 saveArchRProject(archr.proj)
+```
 
+### Run CERP modules
+#### Module: Gini index
+Here we will show how to run CERP modules that extend the annotated marker peak table
+```R
 ## (Module: Gini index) Compute specificity of each marker peak
 archr.proj = peakSpecificity(archr.proj,
                              groupBy="supertype",
                              max_sample_size=500)
+saveArchRProject(archr.proj)
+```
+
+#### Module: PeakRankR
+Here we run PeakRankR to rank our marker peaks. First we load in the subclass annotated marker peaks from CERP:
+```R
+## Load in the annotated marker peak table from `peakAnnotation()`
+marker.peak.table = read.table(file.path(getOutputDirectory(archr.proj), "MarkerPeaks/subclass/subclass_annotated_markerPeaks.tsv"), 
+                                sep="\t", 
+                                header=T)
+archr.proj = peakRankeR_annotation(archr.proj, 
+                                    groupBy="subclass", 
+                                    marker.peak.table)
 saveArchRProject(archr.proj)
 ```
 
