@@ -6,9 +6,9 @@
 \usage{
 peakCaller(
   archr.proj,
-  archr.genome,
   groupBy,
   dataset,
+  taxonomy,
   genomeSize = NULL,
   arrow.file.dir = NULL,
   cell.annotation.file = NULL,
@@ -24,11 +24,11 @@ peakCaller(
 \arguments{
 \item{archr.proj}{An already setup ArchR project or a name (string) to build a new ArchR project. If passing an already defined archr.proj then arrow.file.dir and cell.annotation.file will not be used.}
 
-\item{archr.genome}{Valid genome name for ArchR: mm10, hg38}
-
 \item{groupBy}{Metadata field to group cells by}
 
 \item{dataset}{Information about the dataset that these marker peaks belong to. E.g. Brain region, etc.}
+
+\item{taxonomy}{A defined taxonomy ID assocaiated with cell type annotations used for peak calling.}
 
 \item{genomeSize}{Number of threads to utilize, warning increases memory usage as well.}
 

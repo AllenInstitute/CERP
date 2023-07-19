@@ -1,6 +1,6 @@
 Package: CERP
 Title: cross-species Enhancer Ranking Pipeline (CERP): Call peaks for variety of ATAC-Seq data
-Version: 0.1
+Version: 0.15
 Authors@R: 
     person(given = "Nelson",
            family = "Johansen",
@@ -10,14 +10,15 @@ Authors@R:
         family = "Hooper",
         role = c("aut", "cre"),
         email = "marcus.hooper@alleninstitute.org")
-URL: https://github.com/
+URL: https://github.com/AllenInstitute/CERP/tree/main
 Description: ADD
 License: GPL-3
 Depends: ArchR,
     parallel,
     data.table,
     assertthat,
-    dplyr
+    dplyr,
+    PeakRankR
 Suggests: knitr,
     rmarkdown, 
     testthat

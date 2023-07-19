@@ -1,0 +1,7 @@
+## cp /home/nelson.johansen/scripts/R/github/PeakRankR/PeakRankR_0.0.0.9000.tar.gz /allen/programs/celltypes/workgroups/hct/NelsonJ/docker/CERP
+## cp /home/nelson.johansen/scripts/R/github/PeakRankR/CERP_0.15.tar.gz /allen/programs/celltypes/workgroups/hct/NelsonJ/docker/CERP
+## cd /allen/programs/celltypes/workgroups/hct/NelsonJ/docker/CERP
+## sudo docker build . -t njjai/cerp:0.15
+## sudo docker njjai/cerp:0.15
+## singularity shell --cleanenv docker://njjai/cerp:0.15
+

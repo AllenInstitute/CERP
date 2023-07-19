@@ -5,6 +5,7 @@
 #' @param marker.table file.path to a tab-seperated file containing results of ArchR marker peak analysis
 #' @param archr.proj An already setup ArchR project or a string to build a new ArchR project.
 #' @param dataset Information about the dataset that these marker peaks belong to. E.g. Brain region, etc.
+#' @param taxonomy A defined taxonomy ID assocaiated with cell type annotations used for peak calling.
 #' @param groupBy The annotation level used to group data for peak calling. E.g. Class, Subclass, etc.
 #' @param publish Set to 'TRUE' if you are ready to make the marker peak table viewable on Shiny.
 #' @param filename filename to save annotated marker table
@@ -14,7 +15,7 @@
 #' @return annotated marker table
 #'
 #' @export
-annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, filename, shiny.dir=NULL, ucsc.user=NULL, ucsc.session=NULL){
+annotatePeaks = function(marker.table, archr.proj, dataset, taxonomy, groupBy, publish, filename, shiny.dir=NULL, ucsc.user=NULL, ucsc.session=NULL){
 
     ##
     marker.table$genome_coordinates = paste0(marker.table$seqnames, ":", marker.table$start, "-", marker.table$end)
@@ -30,7 +31,7 @@ annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, fi
     ## -- Annotate -------------
 
     ## Start reporting table with peak ID
-    marker.reporting = data.frame(peak.id = paste0(getArchRGenome(), "_", dataset, "_", groupBy, "_", marker.table$unique.id, ":peak-", marker.table$idx))
+    marker.reporting = data.frame(peak.id = paste0(getArchRGenome(), "_", dataset, "_", taxonomy, "_", groupBy, "_", archr.proj$unique.id, ":peak-", marker.table$idx))
 
     ## Cell population 
     marker.reporting$cell.population = marker.table$group_name
@@ -68,7 +69,7 @@ annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, fi
 
     ##
     if(publish == TRUE){
-        write.table(marker.reporting, row.names=FALSE, col.names=TRUE, file=paste0(groupBy, "_annotated_markerPeaks.tsv"))
+        write.table(marker.reporting, row.names=FALSE, col.names=TRUE, file=paste0(dataset, "_", taxonomy, "_", groupBy, "_annotated_markerPeaks.tsv"))
     }
 
     ## Save the 
@@ -78,7 +79,7 @@ annotatePeaks = function(marker.table, archr.proj, dataset, groupBy, publish, fi
 
     ##
     if(is.null(archr.proj@projectMetadata$markerAnnotatedPeaks)){ archr.proj@projectMetadata$markerAnnotatedPeaks = list() }
-    archr.proj@projectMetadata$markerAnnotatedPeaks[[paste0(groupBy, "_markerPeaks")]] = marker.reporting
+    archr.proj@projectMetadata$markerAnnotatedPeaks[[paste0(dataset, "_", taxonomy, "_", groupBy, "_annotated_markerPeaks.tsv")]] = marker.reporting
 
     return(archr.proj)
 }

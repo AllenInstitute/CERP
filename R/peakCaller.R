@@ -5,6 +5,7 @@
 #' @param archr.proj An already setup ArchR project or a name (string) to build a new ArchR project. If passing an already defined archr.proj then arrow.file.dir and cell.annotation.file will not be used.
 #' @param groupBy Metadata field to group cells by
 #' @param dataset Information about the dataset that these marker peaks belong to. E.g. Brain region, etc.
+#' @param taxonomy A defined taxonomy ID assocaiated with cell type annotations used for peak calling.
 #' @param genomeSize Number of threads to utilize, warning increases memory usage as well.
 #' @param arrow.file.dir Directory where all the Arrow files are stored 
 #' @param cell.annotation.file File that contains sample_id and additional cell annotations to append to the ArchRProject
@@ -26,7 +27,7 @@
 #' @return ArchRProject, markerPeaks
 #'
 #' @export
-peakCaller = function(archr.proj, groupBy, dataset, 
+peakCaller = function(archr.proj, groupBy, dataset, taxonomy, 
                       genomeSize = NULL,              
                       arrow.file.dir=NULL, 
                       cell.annotation.file=NULL,
@@ -78,6 +79,7 @@ peakCaller = function(archr.proj, groupBy, dataset,
             archr.proj = peakCalling(archr.proj = archr.proj,
                                      groupBy = groupBy,
                                      genomeSize=genomeSize)
+            saveArchRProject(archr.proj)
 
             ##
             print("Identifying marker peaks")
@@ -86,6 +88,7 @@ peakCaller = function(archr.proj, groupBy, dataset,
 
             ## Record marker table location 
             archr.proj@projectMetadata[[paste0("loc_marker_table_", groupBy)]] = file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy, paste0(groupBy, "_markerPeaks.tsv"))
+            saveArchRProject(archr.proj)
 
             ##
             print("Producing bigwig and fragment files")
@@ -160,6 +163,45 @@ peakSpecificity = function(archr.proj, groupBy, max_sample_size=500, numWorkers=
                                         filename = file.path(file.path(getOutputDirectory(archr.proj), "MarkerPeaks", groupBy), paste0(groupBy, "_annotated_markerPeaks.tsv")),
                                         numWorkers = numWorkers,
                                         max_sample_size = max_sample_size)
+    return(archr.proj)
+}
+
+#' Rank peaks using the PeakRankR approach
+#'
+#' Adds new ranking columns to the peak annotation table
+#'
+#' @param archr.proj An ArchR project after running through CERP
+#' @param groupBy Metadata field to group cells by
+#' @param marker.peak.table The annotated marker peak table from `peakAnnotation()`
+#' @param bw.table A table with bigwig file names and corresponding annotations that match cell.population in marker.peak.table.
+#' 
+#' @return ArchRProject
+#'
+#' @export
+peakRankeR_annotation = function(archr.proj, groupBy, marker.peak.table, bw.table=NULL){
+
+    ##
+    if(is.null(bw.table)){
+        bw.files = list.files(file.path(getOutputDirectory(archr.proj), "GroupBigWigs", groupBy), pattern = '*.bw', full.names=T)
+        bw.names = unlist(lapply(strsplit(gsub(paste0(file.path(getOutputDirectory(archr.proj), "GroupBigWigs", groupBy), "/"), "", bw.files), "-"), "[[", 1))
+        bw.table = data.frame(bw_path = bw.files, sample_id = bw.names)
+    }
+
+    ##
+    ranked.marker.peak.table = Peak_RankeR(tsv_file_df = marker.peak.table,
+                                            group_by_column_name = "cell.population",
+                                            background_group     = unique(marker.peak.table$cell.population),
+                                            bw_table             = bw.table, 
+                                            rank_sum             = TRUE,
+                                            weights              = c(1,1,1))
+
+    ## Save marker peaks
+    write.table(marker.list, 
+                file=file.path(getOutputDirectory(archr.proj), "MarkerPeaks/", groupBy, "/", groupBy, "_peakRankR_markerPeaks.tsv"), 
+                sep="\t", 
+                row.names=FALSE)
+
+    ##
     return(archr.proj)
 }
 

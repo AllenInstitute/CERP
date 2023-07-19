@@ -8,6 +8,7 @@ annotatePeaks(
   marker.table,
   archr.proj,
   dataset,
+  taxonomy,
   groupBy,
   publish,
   filename,
@@ -22,6 +23,8 @@ annotatePeaks(
 \item{archr.proj}{An already setup ArchR project or a string to build a new ArchR project.}
 
 \item{dataset}{Information about the dataset that these marker peaks belong to. E.g. Brain region, etc.}
+
+\item{taxonomy}{A defined taxonomy ID assocaiated with cell type annotations used for peak calling.}
 
 \item{groupBy}{The annotation level used to group data for peak calling. E.g. Class, Subclass, etc.}
 
