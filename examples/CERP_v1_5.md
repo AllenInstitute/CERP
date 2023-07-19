@@ -15,14 +15,6 @@ The BICore hosted cerp docker is compatibile with CERP v1.5.
 * (non-interactive) singularity exec docker://bicore/cerp:latest YOUR_SCRIPT.R
 * (interactive) singularity shell docker://bicore/cerp:latest
 
-IMPORTANT! Please do a local install of CERP within the bicore/cerp docker for now:
-
-```{R}
-install.packages("/home/nelson.johansen/scripts/R/github/CERP_0.1.tar.gz")
-.libPaths()
-library(CERP, lib.loc="/home/nelson.johansen/R/x86_64-pc-linux-gnu-library/4.2")
-```
-
 ### Run CERP:
 ```R
 ## Load the relevant libraries
