@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 RUN python3 -m pip install MACS2
 
 # copy the package
-COPY peakCallingPipeline_0.1.tar.gz /tools/peakCallingPipeline_0.1.tar.gz
+COPY peakCallingPipeline_0.15.tar.gz /tools/peakCallingPipeline_0.15.tar.gz
 COPY PeakRankR_0.0.0.9000.tar.gz /tools/PeakRankR_0.0.0.9000.tar.gz
 
 # install dependency packages
@@ -28,7 +28,7 @@ RUN R -e 'BiocManager::install(c( "BiocParallel" )'
 
 # install the package
 RUN R --quiet -e 'install.packages("/tools/PeakRankR_0.0.0.9000.tar.gz", repos=NULL, type="source")'
-RUN R --quiet -e 'install.packages("/tools/peakCallingPipeline_0.1.tar.gz", repos=NULL, type="source")'
+RUN R --quiet -e 'install.packages("/tools/peakCallingPipeline_0.15.tar.gz", repos=NULL, type="source")'
 
 ## Clean up
 RUN rm -rf /var/lib/apt/lists/*
